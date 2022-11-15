@@ -52,20 +52,7 @@ export default {
       }
     },
     addedBucket() {
-      // let flag = true;
-      // for (const idx of this.bucketList.keys()) {
-      //   if (
-      //     JSON.stringify(this.bucketList[idx]) ==
-      //     JSON.stringify(this.addedBucket)
-      //   ) {
-      //     window.alert("이미 추가한 장소입니다.");
-      //     flag = false;
-      //     break;
-      //   }
-      // }
-      // if (flag) {
       this.bucketList.push(this.addedBucket);
-      // }
     },
     addedTimetable() {
       let item = {

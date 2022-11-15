@@ -221,6 +221,7 @@ export default {
       bucketList: [],
       timetableList: [],
       tempAddBucket: {},
+      memberList: [],
     };
   },
   async created() {
@@ -230,6 +231,10 @@ export default {
     this.decoding();
     this.lat = this.tripArea[0].lat;
     this.lng = this.tripArea[0].lng;
+    // console.log("hello");
+    // await this.checkMemberList();
+    // console.log(this.nickname);
+    // console.log(this.memberList);
   },
   watch: {
     planId(newVal, oldVal) {
@@ -269,10 +274,25 @@ export default {
           case 1:
             console.log("참가자입니다.");
             this.connect();
+            this.decoding();
+            console.log(this.nickname);
+            this.memberList.push(this.nickname);
+            // if (!(this.nickname in this.memberList)) {
+            //   this.memberList.push(this.nickname);
+            // }
+
             break;
           case 2:
             console.log("방장입니다.");
             this.connect();
+            console.log(this.nickname);
+            this.decoding();
+            this.memberList.push(this.nickname);
+            // if (!(this.nickname in this.memberList)) {
+            //   this.memberList.push(this.nickname);
+            //   console.log("없으니까 넣는다");
+            // }
+            console.log(this.memberList);
             break;
         }
       }
@@ -574,6 +594,27 @@ export default {
         }
       }
     },
+    async checkMemberList() {
+      for (const idx of this.memberList.keys()) {
+        console.log(this.nickname);
+        console.log(this.memberList[idx]);
+        console.log(JSON.stringify(this.memberList[idx]));
+        if (this.memberList[idx] == this.nickname) {
+          console.log("hihihihi");
+          this.memberList.splice(idx, 1);
+          break;
+        }
+      }
+      console.log(this.memberList);
+      console.log(this.memberList[0]);
+      if (this.memberList.length == 0) {
+        // 버킷 저장
+        await api.saveBucketList(this.tripId);
+      }
+    },
+  },
+  destroyed() {
+    this.checkMemberList();
   },
 };
 </script>

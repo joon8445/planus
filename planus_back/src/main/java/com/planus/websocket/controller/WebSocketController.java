@@ -180,7 +180,7 @@ public class WebSocketController {
             planService.savePlan(p.getPlanId(), false);
             planService.saveTimetable(p.getPlanId(), false);
         }
-        bucketService.createBucketList((long)headerAccessor.getSessionAttributes().get("tripId"));
+//        bucketService.createBucketList((long)headerAccessor.getSessionAttributes().get("tripId"));
 
         //웹소켓세션 비우기
         headerAccessor.getSessionAttributes().clear();
