@@ -1,5 +1,5 @@
 <template>
-  <h1>스피너</h1>
+  <div></div>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
   methods: {
     saveToken(token, refreshToken) {
       this.$cookies.set("token", token, 60 * 30);
-      this.$cookies.set("refresh", refreshToken, 60 * 60 * 24 * 30);
+      this.$cookies.set("refresh", refreshToken, 2 * 60 * 60 * 24 * 30);
       this.$router.push("/");
     },
   },
