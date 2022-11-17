@@ -163,7 +163,6 @@ export default {
   },
   watch: {
     currentPage(newVal) {
-      console.log("currentPage: " + newVal);
       if (this.isSearchByTitle) {
         this.getArticleListByTitle(newVal);
       } else {
@@ -222,6 +221,7 @@ export default {
 
 <style scoped>
 .made-container {
+  padding-top: 6px !important;
   height: 100%;
   position: relative;
 }

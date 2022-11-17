@@ -1,6 +1,6 @@
 <template>
   <v-container class="made-container">
-    <v-row justify="center" height="75vh" class="mt-3">
+    <v-row justify="center" height="75vh" class="mt-0">
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -74,7 +74,6 @@ export default {
   methods: {
     async getMyCommentList() {
       await api.getMyComment(this.currentPage - 1).then((res) => {
-        console.log(res);
         this.commentList = res.commentPage.commentList;
         this.totalPage = res.commentPage.totalPage;
       });

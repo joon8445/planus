@@ -50,7 +50,6 @@ baseAxios.interceptors.response.use(
   (error) => {
     console.log(error);
     if (error.response.data.status == 403) {
-      console.log("권한인증 실패");
       window.location.href = "/";
     }
   }
@@ -306,7 +305,6 @@ const API = {
   },
   async getTimetableListForMap(planId) {
     const response = await this.instance.get("/plans/map/" + planId);
-    console.log(response.data);
     return response.data;
   },
 };

@@ -75,9 +75,7 @@ export default {
   components: {
     UserVideo,
   },
-  async mounted() {
-    // this.joinSession();
-  },
+
   methods: {
     goHome() {
       this.leaveSession();
@@ -97,16 +95,6 @@ export default {
       }
     },
 
-    // async audioCheck() {
-    //   await navigator.mediaDevices
-    //     .getUserMedia({ audio: true })
-    //     .then(() => {
-    //       this.audioActive = true;
-    //     })
-    //     .catch(() => {
-    //       this.audioActive = false;
-    //     });
-    // },
     joinSession() {
       // --- Get an OpenVidu object ---
       this.OV = new OpenVidu();
@@ -168,7 +156,6 @@ export default {
       this.subscribers = [];
       this.OV = undefined;
       this.isConnected = false;
-      //   stompApi.disconnect();
       window.removeEventListener("beforeunload", this.leaveSession);
     },
 

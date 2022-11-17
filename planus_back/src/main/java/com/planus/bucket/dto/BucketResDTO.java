@@ -24,7 +24,6 @@ public class BucketResDTO implements Serializable {
 
     @Builder
     public BucketResDTO(String place, String address, Double lat, Double lng) {
-        //this.bucketId = bucketId;
         this.place = place;
         this.address = address;
         this.lat = lat;
@@ -34,7 +33,6 @@ public class BucketResDTO implements Serializable {
     // Bucket -> BucketResDTO
     public static BucketResDTO toResDTO(Bucket bucket) {
         return BucketResDTO.builder()
-                //.bucketId(bucket.getBucketId())
                 .place(bucket.getPlace())
                 .address(bucket.getAddress())
                 .lat(bucket.getLat())

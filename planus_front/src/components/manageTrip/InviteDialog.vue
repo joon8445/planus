@@ -109,8 +109,6 @@ export default {
       this.$emit("getConnector");
       this.res = await api.getMemberList(this.tripId);
       this.memberList = this.res.memberList;
-      console.log(this.memberList);
-      console.log(this.connector);
     },
     copyUrl() {
       navigator.clipboard.writeText(window.location.href).then(() => {

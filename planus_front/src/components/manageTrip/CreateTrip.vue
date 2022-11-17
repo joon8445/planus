@@ -238,7 +238,6 @@ export default {
     async getAllArea() {
       this.res = await api.getAllArea();
       let res = this.res.areaList;
-      console.log(res);
       this.areaGroup1 = res.slice(0, 2);
       this.areaGroup2 = res.slice(2, 33);
       this.areaGroup3 = res.slice(33, 51);

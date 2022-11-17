@@ -139,7 +139,6 @@ export default {
   watch: {
     WebSocketStartTime(newVal) {
       if (newVal.planId == this.plan.planId) {
-        console.log(newVal.startTime);
         this.startTime = newVal.startTime * 1;
         this.startHour = Math.floor(this.startTime / 60);
         this.startMin = this.startTime % 60;
@@ -153,7 +152,6 @@ export default {
     },
     timetableList: {
       handler() {
-        console.log("timetableList에 변경사항 있음");
         this.calculateCalTime(this.calTime, this.timetableList, this.startTime);
         //re-rendering을 위해 배열 splice 필요
         this.calTime.splice(0, 1, this.startTime);
@@ -173,7 +171,6 @@ export default {
         this.timetableList = newVal.timetableList;
       }
       // //re-rendering을 위해 배열 splice
-      // this.timetableList.splice(0, 1, this.timetableList[0]);
     },
     addedTimetable(newVal) {
       if (this.plan.planId == newVal.planId) {
@@ -194,7 +191,6 @@ export default {
     },
     changedTimetable(newVal) {
       if (this.plan.planId == newVal.planId) {
-        // this.timetableList[newVal.orders - 1] = newVal;
         //re-rendering을 위해 배열 splice
         this.timetableList.splice(newVal.orders - 1, 1, newVal);
       }
@@ -302,8 +298,6 @@ export default {
       //해당 timetable 객체의 costTime을 수동으로 바꿔줌 .. ...왜..?
       this.timetableList[newTimetable.orders - 1].costTime =
         newTimetable.costTime;
-      console.log("PlanList");
-      console.log(newTimetable);
     },
     delTimetable(delOrders) {
       //delOrder의 Timetable만 빼고 새로운 timetableList를 구성
@@ -341,7 +335,6 @@ export default {
     },
     // Timetable이 추가돼도 삭제돼도 orders가 제대로 안 들어가서.. orders 갱신하는 함수 따로 뺌
     updateOrders(list) {
-      console.log("updateOrders로 들어옴");
       for (let i = 0; i < list.length; i++) {
         list[i].orders = i + 1;
       }
@@ -377,10 +370,6 @@ export default {
       }
 
       //splice로 oldIdx -> newIdx 배열 내 위치 변경
-      // let selectedTimetable = this.timetableList[oldIdx];
-
-      // this.timetableList.splice(oldIdx, 1);
-      // this.timetableList.splice(newIdx, 0, selectedTimetable);
 
       this.timetableList[newIdx].transit = "NONE";
       this.timetableList[newIdx].moveTime = 0;

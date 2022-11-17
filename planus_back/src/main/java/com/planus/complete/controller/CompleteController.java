@@ -47,14 +47,8 @@ public class CompleteController {
     }
 
     @PostMapping("/image")
-    public ResponseEntity<String> completeImageUpload(@RequestPart Long tripId, @RequestPart MultipartFile file) {
-        try {
-
+    public ResponseEntity<String> completeImageUpload(@RequestPart Long tripId, @RequestPart MultipartFile file) throws IOException {
             return ResponseEntity.ok().body(completeService.completeImageUpload(tripId, file));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity("", HttpStatus.BAD_REQUEST);
-        }
     }
 
     // S3 파일 삭제 용도(테스트)

@@ -33,7 +33,6 @@ public class RecommendController {
         Map<String, Object> resultMap = new HashMap<>();
         try{
             resultMap.put("recommendList", recommendService.findRecommendByLocation(lat,lng,pageable));
-            logger.info("recommend"+resultMap);
             return new ResponseEntity(resultMap,HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

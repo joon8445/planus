@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/buckets")
 public class BucketController {
 //    // LoggerFactory를 이용하여 Logger 객체 생성
-//    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final BucketService bucketService;
 

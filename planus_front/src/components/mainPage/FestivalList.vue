@@ -67,14 +67,12 @@ export default {
   watch: {
     currentPage(newVal) {
       this.getFestival(newVal);
-      console.log("페이지: " + newVal);
     },
   },
   methods: {
     async getBestArea() {
       this.res = await api.getBestArea();
       this.areaList = this.res.areaList;
-      console.log(this.areaList);
     },
     async getFestival(page) {
       this.res = await api.getFestival(page - 1);

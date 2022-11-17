@@ -16,7 +16,6 @@ public interface ArticleService {
 
     long createArticle(String token, ArticleReqDTO articleReqDTO);
 
-    //ArticleResDTO findOneArticle(long articleId);
 
     Map<String, String> deleteArticle(String token, long articleId);
 

@@ -49,7 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
         User user = userRepository.findByUserId(tokenProvider.getUserId(token.split(" ")[1]));
         Article article = ArticleReqDTO.toEntity(articleReqDTO, trip, user);
         articleRepository.save(article);
-        System.out.println(tripRepository.findByTripId(articleReqDTO.getTripId()));
         return article.getArticleId();
     }
 
@@ -75,8 +74,6 @@ public class ArticleServiceImpl implements ArticleService {
         if (tokenProvider.getUserId(token.split(" ")[1]) == article.getUser().getUserId()) {
             article.updateArticle(articleReqDTO.getTitle(), articleReqDTO.getContent(), tripRepository.findByTripId(articleReqDTO.getTripId()), LocalDateTime.now());
             articleRepository.save(article);
-        } else {
-            System.out.println("실패!");
         }
         return articleId;
     }
@@ -85,15 +82,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public ArticleDetailResDTO findOneArticle(long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(() -> new CustomException("존재하지 않는 게시글입니다."));
-        System.out.println(article.getHits());
         article.addHits();
-        System.out.println(article.getHits());
         int likeCount = articleLikeRepository.countByArticleArticleId(articleId);
         UserResDTO user = UserResDTO.toResDto(article.getUser());
         MyTripResDTO trip = MyTripResDTO.toResDTO(article.getTrip());
         List<Plan> plans = article.getTrip().getPlanList();
         List<PlanResDTO> planList = plans.stream().map(plan -> PlanResDTO.toResDTO(plan)).collect(Collectors.toList());
-        System.out.println(article.getContent());
         return ArticleDetailResDTO.toEntity(article, likeCount, articleLikeRepository.existsByArticleArticleIdAndUserUserId(articleId, user.getUserId()), user, trip, planList);
 
     }
@@ -111,7 +105,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<SearchDTO> getArticleListByArea(String token, int[] area, Pageable pageable) {
-        System.out.println(Arrays.toString(area));
         List<Article> articleList = articleRepository.findByArea(area, pageable);
 
         return setArticleList(token, articleList);
@@ -224,10 +217,6 @@ public class ArticleServiceImpl implements ArticleService {
         long userId = tokenProvider.getUserId(token.split(" ")[1]);
         Page<Article> articles = articleRepository.findArticleByUserUserId(userId, pageable);
         return ArticleResDTO.toDTO(articles);
-//        List<ArticleLike> articleLikes = articleLikeRepository.findByUserUserId(userId);
-//        List<Article> articles = articleLikes.stream().map(articleLike -> articleLike.getArticle()).collect(Collectors.toList());
-//        Page<Article> articleList = new PageImpl<>(articles);
-//        System.out.println(articleList);
 
     }
 

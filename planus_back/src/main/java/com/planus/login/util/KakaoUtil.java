@@ -46,17 +46,10 @@ public class KakaoUtil {
                 result+=temp;
             }
             JsonObject jsonResult = JsonParser.parseString(result).getAsJsonObject();
-            String id = jsonResult.get("id").getAsString();
-//            System.out.println("id = " +id+" 탈퇴함");
             br.close();
 
         }catch(Exception e){
-            System.out.println("탈퇴에서 에러 발생");
-            InputStream errorStream = conn.getErrorStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            String error = "";
-            while((error=br.readLine())!=null) System.out.println(error);
-
+            e.printStackTrace();
         }
     }
 

@@ -213,7 +213,6 @@ export default {
       isRecommendClick: false,
       deletedBucket: {},
       addedBucket: {},
-      // plan
       addedTimetable: {},
       //삭제된 것을 제외한 timetableList
       deletedTimetableList: {},
@@ -247,7 +246,6 @@ export default {
 
     this.res = await api.getTimetableListForMap(this.planId);
     this.timetableList = this.res.timetableList;
-    console.log(this.timetableList);
   },
   watch: {
     async planId(newVal, oldVal) {
@@ -292,11 +290,9 @@ export default {
             this.addMember();
             break;
           case 1:
-            console.log("참가자입니다.");
             this.connect();
             break;
           case 2:
-            console.log("방장입니다.");
             this.connect();
             break;
         }
@@ -314,7 +310,6 @@ export default {
       } else {
         this.connect();
       }
-      console.log(this.res.memberId);
     },
     connect() {
       this.isConnect = true;
@@ -330,7 +325,6 @@ export default {
           this.chatList.push(content.userName + ": " + content.chatMsg);
           break;
         case 2:
-          console.log(content);
           // TODO: 버킷리스트 추가
           this.addedBucket = {
             place: content.place,
@@ -340,7 +334,6 @@ export default {
           };
           break;
         case 3:
-          console.log(content);
           // TODO: 버킷리스트 삭제
           this.deletedBucket = {
             place: content.place,
@@ -350,7 +343,6 @@ export default {
           };
           break;
         case 4:
-          console.log(content);
           // TODO: 일정(plan)변경
           this.startTime = {
             planId: content.planId,
@@ -358,7 +350,6 @@ export default {
           };
           break;
         case 5:
-          console.log(content);
           // TODO: 일정(timetable)추가
           this.addedTimetable = {
             costTime: content.costTime,
@@ -375,7 +366,6 @@ export default {
           };
           break;
         case 6:
-          console.log(content);
           // TODO: 일정(timetable)삭제
           this.deletedTimetableList = {
             planId: content.planId,
@@ -383,7 +373,6 @@ export default {
           };
           break;
         case 7:
-          console.log(content);
           // TODO: 일정(timetable) 순서 변경
           this.setOrdersTimetableList = {
             planId: content.planId,
@@ -391,7 +380,6 @@ export default {
           };
           break;
         case 8:
-          console.log(content);
           // TODO: 일정(timetable) 수정
           this.changedTimetable = {
             costTime: content.costTime,
@@ -406,8 +394,6 @@ export default {
           };
           break;
         case 9:
-          console.log("권한변경 수신");
-          console.log(content);
           this.admin = content.newAdminId;
           if (content.newAdminId == this.userId) {
             this.memberOrAdmin = 2;
@@ -416,7 +402,6 @@ export default {
           }
           break;
         case 10:
-          console.log(content);
           // 완료페이지로 이동
           if (content.completed) {
             this.$router.push("/complete/" + this.tripUrl);
@@ -505,13 +490,6 @@ export default {
         this.planIdList = res.planIdList;
         this.planId = res.planIdList[0].planId;
       });
-      // console.log(this.planIdList);
-      // let paramPlanIdList = [];
-      // this.planIdList.forEach((p) => {
-      //   paramPlanIdList.push(p.planId);
-      //   console.log(p.planId);
-      // });
-      // await api.getPlanList(paramPlanIdList);
     },
     setPlan(newPlan) {
       if (this.token) {

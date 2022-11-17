@@ -34,7 +34,6 @@ const WSAPI = {
     this.stomp.send("/app/chat", JSON.stringify(message));
   },
   addBucket(tripId, place, address, lat, lng) {
-    console.log("버킷추가");
     let bucket = {
       tripId: tripId,
       place: place,

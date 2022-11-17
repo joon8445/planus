@@ -119,9 +119,9 @@ public class TokenProvider {
             Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
             return Long.parseLong( String.valueOf(claims.get("userId")));
         }catch (SignatureException e){
-            System.out.println("토큰 서명과정에서 에러 발생함(getUserId)");
+            e.printStackTrace();
         }catch (Exception e){
-            System.out.println("토큰 파싱과정에서 에러발생(서명아님)(getUserId)");
+            e.printStackTrace();
         }
         return -1;
     }

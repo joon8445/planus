@@ -17,11 +17,9 @@
 </template>
 
 <script>
-// import API from "@/api/RESTAPI";
 import CommentList from "@/components/community/CommentList.vue";
 import ArticleDetail from "@/components/community/ArticleDetail.vue";
 import LoginButton from "@/components/KakaoLogin/LoginButton.vue";
-// const api = API;
 export default {
   name: "CommunityView",
   components: {

@@ -27,23 +27,7 @@ public class LoginController {
     private final TokenProvider tokenProvider;
 
     private final KakaoUtil kakaoUtil;
-//TODO: 테스트 삭제
 
-//    @GetMapping("/test")
-//    public void Test(@RequestHeader String Authorization){
-//        String token=Authorization.split(" ")[1];
-//        long userIdFromToken = tokenProvider.getUserId(token);
-//        UserInfoResDTO userInfo = userService.findUserInfo(userIdFromToken);
-//        System.out.println("Welcome! "+ userInfo.getNickname());
-//    }
-//
-//    @GetMapping("/test2")
-//    public void Test2(@RequestHeader String Authorization){
-//        String token=Authorization.split(" ")[1];
-//        long userIdFromToken = tokenProvider.getUserId(token);
-//        UserInfoResDTO userInfo = userService.findUserInfo(userIdFromToken);
-//        System.out.println("Welcome2222! "+ userInfo.getNickname());
-//    }
 
     @GetMapping("/signout")
     public void signOut(@RequestHeader String Authorization, HttpServletResponse response) throws IOException {
@@ -55,7 +39,7 @@ public class LoginController {
             kakaoUtil.kakaoSignOut(kakaoId);
             userService.deleteUser(userIdFromToken);
         }catch(Exception e){
-            System.out.println("탈퇴에서 에러 발생");
+            e.printStackTrace();
         }
         return;
     }

@@ -49,7 +49,6 @@ public class PlanController {
     @PostMapping("/planlist")
     @ApiOperation(value = "planList 정보 조회", notes = "planId 목록을 이용해 일정 정보를 불러옵니다.")
     public ResponseEntity getPlanList(@RequestBody List<Long> planIdList) {
-        System.out.println(planIdList.toArray().toString());
 
         Map<String, Object> resultMap = new HashMap<>();
 

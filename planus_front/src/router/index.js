@@ -1,16 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import CompletePage from "@/components/completetemp/CompletePage.vue";
 import HomeView from "../views/HomeView.vue";
 import MypageView from "../views/MypageView.vue";
 import PlanView from "../views/PlansView.vue";
-import Recommend from "@/components/recommend/RecommendPlace.vue";
 import getKakaoToken from "../components/KakaoLogin/GetKakaoToken.vue";
 import CompleteView from "../views/CompleteView.vue";
-import Chat from "@/components/chat/WebSocketTest.vue";
 import CommunityView from "../views/CommunityView.vue";
 import ArticleView from "../views/ArticleView.vue";
-import TokenTestButton from "@/components/KakaoLogin/TokenTestButton";
 import ArticleNewView from "@/views/ArticleNewView";
 import ArticleEditView from "@/views/ArticleEditView";
 
@@ -66,37 +62,11 @@ const routes = [
     name: "getKakaoToken",
     component: getKakaoToken,
   },
-  // {
-  //   path: "/about",
-  //   name: "about",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  // },
-  {
-    // 임시
-    path: "/recommend",
-    name: "recommend",
-    component: Recommend,
-  },
   {
     path: "/complete/:tripUrl",
     name: "complete",
     component: CompleteView,
   },
-  {
-    //임시
-    path: "/chat",
-    name: "chat",
-    component: Chat,
-  },
-  // {
-  //   path: "/completetest/:url",
-  //   name: "completePage",
-  //   component: CompletePage,
-  // },
   {
     path: "/community",
     name: "community",
@@ -107,11 +77,6 @@ const routes = [
     path: "/article/:articleId",
     name: "article",
     component: ArticleView,
-  },
-  {
-    path: "/test",
-    name: "test",
-    component: TokenTestButton,
   },
   {
     path: "/newArticle",

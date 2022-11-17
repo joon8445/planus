@@ -110,9 +110,6 @@ public class MemberServiceImpl implements MemberService{
 
         Map map = hashOperations.entries(key);
 
-        map.forEach((key2, value) -> {
-            System.out.println(key2 + " : " + value);
-        });
 
         Object[] array = map.keySet().toArray();
 

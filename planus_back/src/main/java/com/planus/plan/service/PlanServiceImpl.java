@@ -66,7 +66,6 @@ public class PlanServiceImpl implements PlanService {
 
             // redis에 값이 있으면 redis에서 가져오고,
             if (redisUtil.isExists(planKey)) {
-                System.out.println("redis에서 " + planKey);
 
                 //planList::planId 를 key로 가진 hash에서 startTime, tripDate를 가져올 수 있음
                 Map<String, String> map = redisUtil.getHashData(planKey);
@@ -112,15 +111,10 @@ public class PlanServiceImpl implements PlanService {
 
             // 없으면 mysql에서 가져오기 + redis에 저장하기
             else {
-                System.out.println(planId+"를 mysql에서 가져옵니다.");
 
                 //redis에 timetableList::planId가 있으면 삭제 후 넣기
                 if(redisUtil.isExists(timetableKey)) {
-                    System.out.println("redis에 timetableList가 있어 삭제합니다.");
                     redisUtil.deleteData(timetableKey);
-                }
-                else {
-                    System.out.println("redis에 timetableList가 없습니다! 삭제 없이 바로 저장합니다.");
                 }
 
                 Plan plan = planRepository.findByPlanId(planId).orElseThrow();
@@ -155,7 +149,6 @@ public class PlanServiceImpl implements PlanService {
                     jsonObject.put("move_route", t.getMoveRoute());
 
                     String timetableStr = jsonObject.toJSONString();
-                    System.out.println("timetableStr => "+timetableStr);
 
                     redisUtil.addListData(timetableKey, timetableStr);
                 }
@@ -190,11 +183,9 @@ public class PlanServiceImpl implements PlanService {
         String key = "planList::" + planId;
 
         if(!redisUtil.isExists(key)){
-            System.out.println(key+"번 key가 없음(planList)");
             return;
         }
         else {
-            System.out.println(key+"번 key가 있음(planList)");
         }
 
         Map<String, String> map = redisUtil.getHashData(key);
@@ -210,7 +201,6 @@ public class PlanServiceImpl implements PlanService {
 
         //complete가 false면 redis 삭제 안 하고, true면 redis에서 삭제함(일정 완료)
         if(complete) {
-            System.out.println(key+" redis에서 삭제");
             redisUtil.deleteData(key);
         }
     }
@@ -231,7 +221,6 @@ public class PlanServiceImpl implements PlanService {
         //사용자가 화면에서 timetable을 다 지워버려서 없는 경우와,
         //사용자가 아예 그 탭을 눌러보지도 않아서 없는 경우가 있음.
         if(!redisUtil.isExists(key)){
-            System.out.println(key+"번 key가 없음(timetableList)");
             return;
         }
 
@@ -266,7 +255,6 @@ public class PlanServiceImpl implements PlanService {
 
             //complete가 false면 redis 삭제 안 하고, true면 redis에서 삭제함(일정 완료)
             if(complete) {
-                System.out.println(key+" redis에서 삭제");
                 redisUtil.deleteData(key);
             }
 
@@ -300,8 +288,6 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void setPlan(long planId, WebSocketPlan plan) {
-        System.out.println("setPlan으로 들어왔음");
-//        HashOperations<String, String, String> hashOperations = redisTemplate.opsForHash();
         String key = "planList::" + planId;
 
         Map<String, Object> map = new HashMap<>();
@@ -318,7 +304,6 @@ public class PlanServiceImpl implements PlanService {
 
         //여기서 새로 추가할 Timetable의 orders를 계산
         int orders = (int) redisUtil.getListDataSize(key)+1;
-        System.out.println("addTimetable에서 계산한 orders : " + orders);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("orders", orders);
@@ -422,7 +407,6 @@ public class PlanServiceImpl implements PlanService {
         }
 
         if(!redisUtil.isExists(key)){
-            System.out.println(key+"에서 타임테이블을 다 삭제해버려서 얘도 없어짐");
             // 타임테이블을 모두 삭제하면 redis에서 timetableList도 삭제되어 이후 saveTimetable할 때 정상적으로 반영이 안 되므로 여기서 mysql 저장
             timetableRepository.deleteByPlanPlanId(planId);
         };

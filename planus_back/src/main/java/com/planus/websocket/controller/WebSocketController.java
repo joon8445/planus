@@ -108,7 +108,6 @@ public class WebSocketController {
     @MessageMapping("/addTimetable")
     public void addTimetable(WebSocketTimetable timetable){
         timetable.setAction(5);
-        logger.info("fromBucket? "+timetable.getFromBucket());
         if(timetable.getFromBucket()){
             // TODO: bucket redis 작업
             bucketService.moveToPlan(timetable);
@@ -148,10 +147,8 @@ public class WebSocketController {
         long originAdminId = admin.getOriginAdminId();
         Trip trip = tripService.findByTripId(admin.getTripId());
         if(trip.getAdmin()!=originAdminId){
-            System.out.println("방장 아닌 사람이 위임 요청함");
             return;
         }else if (!memberService.isMemberOfTrip(admin.getTripId(), admin.getNewAdminId())){
-            System.out.println("여행 멤버 아닌 사람한테 방장 위임 요청 들어옴");
             return;
         }else{
             tripService.changeAdminForWebSocket(trip,admin.getNewAdminId());

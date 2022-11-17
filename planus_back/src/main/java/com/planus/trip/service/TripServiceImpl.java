@@ -140,10 +140,8 @@ public class TripServiceImpl implements TripService {
         long requestUserId = tokenProvider.getUserId(token);
 
         if (adminId != requestUserId) {
-            System.out.println("방장이 아닌데 요청이 들어왔음");
             return -1;
         } else if (!memberRepository.existsByTripTripIdAndUserUserId(tripId, userId)) {
-            System.out.println("없는 사람한테 위임함");
             return -1;
         } else {
             trip.changeAdmin(userId);
@@ -180,9 +178,7 @@ public class TripServiceImpl implements TripService {
     @Override
     @Transactional
     public long changeAdminForWebSocket(Trip trip, long userId) {
-        System.out.println("서비스단 호출");
         trip.changeAdmin(userId);
-        System.out.println("=========================="+trip.getAdmin());
         tripRepository.save(trip);
         return userId;
     }

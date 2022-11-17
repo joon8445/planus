@@ -31,9 +31,17 @@
           color: '#4A8072',
           fontWeight: 'bold',
         }"
-        @click="clickLocation(m, 15)"
+        @click="clickLocation(m, 15), clickBucketMarker(index)"
         id="bucket"
-      ></gmap-marker>
+        ><gmap-info-window
+          v-if="bucketInfo[index]"
+          :opened="bucketInfo[index]"
+          @closeclick="bucketInfo[index] = false"
+        >
+          <h3>{{ bucketList[index].place }}</h3>
+          <h6>{{ bucketList[index].address }}</h6>
+        </gmap-info-window></gmap-marker
+      >
       <gmap-marker
         :key="index + 'p'"
         v-for="(m, index) in timetableList"
@@ -95,6 +103,7 @@ export default {
       nowCenter: {},
       planList: [],
       isInfo: false,
+      bucketInfo: [],
     };
   },
   props: {
@@ -122,6 +131,12 @@ export default {
     },
     getCurrentZoom(zoom) {
       this.zoom = zoom;
+    },
+    clickBucketMarker(index) {
+      for (let i = 0; i < this.bucketInfo.length; i++) {
+        if (this.bucketInfo[i]) this.bucketInfo[i] = false;
+      }
+      this.bucketInfo[index] = true;
     },
   },
   watch: {

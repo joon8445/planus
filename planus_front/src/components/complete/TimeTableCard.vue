@@ -25,7 +25,6 @@
           <v-card-subtitle class="py-0 font-weight-black d-flex justify-center">
             <span v-if="timeTable.transit == 'BUS'">{{ move.BUS }}</span>
             <span v-else-if="timeTable.transit == 'CAR'">{{ move.CAR }}</span>
-            <span v-else-if="timeTable.transit == 'WALK'">{{ move.WALK }}</span>
             <span v-else>{{ move.NONE }}</span>
           </v-card-subtitle>
           <v-card-text class="py-0 text-caption d-flex justify-center">{{
@@ -51,7 +50,6 @@ export default {
       move: {
         BUS: "대중교통",
         CAR: "자가용",
-        WALK: "도보",
         NONE: "-",
       },
     };

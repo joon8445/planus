@@ -93,9 +93,6 @@ export default {
       );
     },
   },
-  created() {
-    // this.getBucketList();
-  },
 };
 </script>
 <style></style>

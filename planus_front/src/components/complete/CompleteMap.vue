@@ -92,24 +92,6 @@ export default {
       this.areaName = newVal[0].siName;
     },
     completeList(newVal) {
-      // let lat = 0;
-      // let lng = 0;
-      // newVal.forEach((element) => {
-      //   let tmpLat = 0;
-      //   let tmpLng = 0;
-      //   element.timetableList.forEach((e) => {
-      //     tmpLat += e.lat;
-      //     tmpLng += e.lng;
-      //   });
-      //   lat += tmpLat / element.timetableList.length;
-      //   lng += tmpLng / element.timetableList.length;
-      // });
-      // lat /= newVal.length;
-      // lng /= newVal.length;
-
-      // this.center = { lat, lng };
-      // this.nowCenter = this.center;
-
       let lat = 0;
       let lng = 0;
       let cnt = 0;

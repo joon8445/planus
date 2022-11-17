@@ -198,7 +198,6 @@ export default {
           data: formData,
         })
           .then((res) => {
-            console.log(res.data);
             if (res.data != "fail") this.tripInfo.imageUrl = res.data;
           })
           .catch((err) => {

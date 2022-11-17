@@ -13,7 +13,7 @@
     </div>
     <v-container class="pb-0">
       <v-container class="d-flex justify-center">
-        <v-sheet height="85vh" class="content">
+        <v-sheet height="84vh" class="content">
           <router-view style="width: 80vw; max-width: 80vw" />
         </v-sheet>
         <div style="padding-top: 3%">

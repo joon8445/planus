@@ -125,7 +125,6 @@ export default {
   watch: {
     currentPage(newVal) {
       this.getCommentList(newVal);
-      console.log("페이지: " + newVal);
     },
   },
   methods: {

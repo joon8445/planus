@@ -67,7 +67,6 @@ export default {
   methods: {
     ...mapMutations(mapStore, ["SET_SPOT_INFO"]),
     bucketClick() {
-      console.log(this.searchedPlace);
       this.$emit(
         "addBucket",
         this.searchedPlace.place,
