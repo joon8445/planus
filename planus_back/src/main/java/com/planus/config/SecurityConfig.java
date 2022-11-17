@@ -61,6 +61,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/comment/**").permitAll()
                 .antMatchers("/comment/**").hasAuthority("ROLE_MEMBER")
                 //complete
+                .antMatchers("/complete/copy/**").hasAuthority("ROLE_MEMBER")
                 .antMatchers("/complete/**").permitAll()
                 //mytrip
                 .antMatchers("/mytrip/**").hasAuthority("ROLE_MEMBER")
